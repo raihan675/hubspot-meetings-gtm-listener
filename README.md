@@ -1,11 +1,8 @@
 # HubSpot Meetings Multi-Step GTM Funnel Listener
 
-A lightweight, universal, zero-dependency tracking listener for embedded **HubSpot Meetings & Scheduling Calendars**. 
+A universal, zero-dependency tracking listener for embedded **HubSpot Meetings & Scheduling Calendars**. 
 
 Tracks the complete visitor journey across **Google Tag Manager (GTM)**, **Google Analytics 4 (GA4)**, **Google Ads Enhanced Conversions**, and **Meta Pixel / Conversions API (CAPI)**.
-
-[![GitHub License](https://img.shields.io/github/license/raihan675/hubspot-meetings-gtm-listener)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/raihan675/hubspot-meetings-gtm-listener)](https://github.com/raihan675/hubspot-meetings-gtm-listener/stargazers)
 
 ---
 
@@ -18,14 +15,14 @@ Tracks the complete visitor journey across **Google Tag Manager (GTM)**, **Googl
 * **100% Universal Compatibility**: Works with 1-on-1 personal links, Round Robin team links, group meetings, and custom CNAME scheduling domains (e.g., `mail.yourdomain.com`).
 * **High-Match Attribution**: Automatically captures verified `email`, `first_name`, and `last_name` in Step 3 for **Google Ads Enhanced Conversions** and **Meta Advanced Matching**.
 * **Zero DOM Scraping**: Built entirely on HubSpot's official `window.postMessage` lifecycle architecture.
-* **Ad-blocker & Privacy Compliant**: Omits sensitive identifiers not provided by the iframe while respecting visitor consent boundaries.
+* **Privacy Compliant**: Captures verified application data without DOM scraping.
 
 ---
 
 ## 📊 Funnel Steps & DataLayer Schema
 
 ### Step 1: `calender view`
-Triggered automatically when the HubSpot scheduler iframe loads and is visible to the visitor.
+Triggered automatically when the HubSpot scheduler iframe loads and is ready.
 
 ```javascript
 window.dataLayer.push({
@@ -39,7 +36,7 @@ window.dataLayer.push({
 ---
 
 ### Step 2: `date and time select`
-Triggered when the visitor selects an available date and time slot, which opens the contact details form.
+Triggered when the visitor selects an available date and time slot, revealing the contact form.
 
 ```javascript
 window.dataLayer.push({
@@ -83,15 +80,15 @@ window.dataLayer.push({
 
 ## 🛠 Installation Guide
 
-### Method A: Google Tag Manager (Recommended)
+### Method A: Google Tag Manager (Custom HTML)
 
 1. Open your **Google Tag Manager** container.
 2. Go to **Tags** > click **New**.
 3. Select Tag Type: **Custom HTML**.
-4. Paste the minified code from [`hubspot-meetings-listener.min.js`](hubspot-meetings-listener.min.js) wrapped in `<script>` tags:
+4. Paste the full code from [`hubspot-meetings-listener.js`](hubspot-meetings-listener.js) wrapped in `<script>` tags:
    ```html
    <script>
-   // Paste content of hubspot-meetings-listener.min.js here
+   // Paste content of hubspot-meetings-listener.js here
    </script>
    ```
 5. Trigger: **Page View** or **DOM Ready** (on pages containing the HubSpot meeting calendar, or on *All Pages*).
@@ -104,7 +101,7 @@ window.dataLayer.push({
 Add this directly into your theme's `footer.php`, child theme, or via a script manager plugin:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/raihan675/hubspot-meetings-gtm-listener@main/hubspot-meetings-listener.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/raihan675/hubspot-meetings-gtm-listener@main/hubspot-meetings-listener.js"></script>
 ```
 
 ---
@@ -183,8 +180,3 @@ window.dataLayer.push({
   }
 });
 ```
-
----
-
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
